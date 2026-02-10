@@ -1,13 +1,13 @@
 const express =require('express');
-const handle = require('./handle');
+
 const app = express();
-const admin = express()
-app.locals.title = 'My Express App';
+const admin = express.Router();
 admin.get('/dashboard',(req,res)=>{
-    req.send('admin dashboard');
-})
-app.get('/',handle);
-app.use('/admin',admin);    
+    console.log(req.baseUrl);
+    res.send('We are in Admin Dashboard');
+});
+
+app.use('/admin',admin);
 
 
 app.listen(3000,()=>{
