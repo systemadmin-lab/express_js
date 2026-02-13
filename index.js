@@ -1,16 +1,26 @@
-const express =require('express');
-
+const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
-const admin = express.Router();
-admin.get('/dashboard',(req,res)=>{
-    console.log(req.baseUrl);
-    res.send('We are in Admin Dashboard');
-});
+app.use(express.json());
 
-app.use('/admin',admin);
+//database connection
+mongoose.connect("mongodb://localhost/todos").then(()=>{
+    console.log("connected to database");
+}).catch((err)=>{
+    console.log(err);
+})
+
+
+
+function errorHandler(err, req, res, next) {
+    console.log(err);
+    res.status(500).json({
+        message: "Something went wrong",
+        error: err.message
+    })
+}
 
 
 app.listen(3000,()=>{
-    console.log('Server is running on port 3000');
-  
-}); 
+    console.log("running and burning");
+})
