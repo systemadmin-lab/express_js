@@ -4,7 +4,10 @@ const app = express();
 app.use(express.json());
 
 //database connection
-mongoose.connect("mongodb://localhost/todos").then(()=>{
+mongoose.connect("mongodb://localhost/todos")
+
+.then(()=>{
+    
     console.log("connected to database");
 }).catch((err)=>{
     console.log(err);
